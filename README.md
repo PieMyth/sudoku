@@ -1,5 +1,5 @@
 # sudoku
-A reasonable efficient Sudoku solver made in c. Will solve the example 9x9 board in 7,600 function calls in the recursion. Was in the "expert" category of a sudoku book I pulled it out.
+A reasonably efficient Sudoku solver made in c. Will solve the example 9x9 board in 7,600 function calls in the recursion. Was in the "expert" category of a sudoku book I pulled it out.
 
 ## Getting Started
 
