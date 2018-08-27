@@ -11,8 +11,12 @@
 
 #define SIZE 9
 
+//b is the sodoku board
+//calculations is the number of tries
+//the solve function takes to try to solve it
 typedef struct {
 	int b[SIZE][SIZE];
+    int calculations;
 }board;
 
 
