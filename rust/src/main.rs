@@ -17,11 +17,12 @@ fn main() {
         vec!{6,6,6,7,7,7,8,8,8}, 
         vec!{6,6,6,7,7,7,8,8,8}
     };
-    let _test_board = board::Board{grid:grid, calculations:0};
+    let _test_board = board::Board{grid:grid, calculations:0, size: 9};
     let test_board = board::new(9);
     println!("{:?}", test_board.get_column(1));
     println!("{:?}", test_board.get_row(1));
     println!("{:?}", test_board.get_square(0));
-    println!("{}",test_board.check_duplicate());
+    println!("{}", test_board.check_duplicate());
+    println!("{}", test_board.valid(true));
     println!("{}", test_board);
 }

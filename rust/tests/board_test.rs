@@ -36,30 +36,57 @@ fn new_valid_test(){
 #[test]
 fn get_column_valid_test(){
     let grid: Vec<Vec<u8>> = vec!{
-        vec!{1,2,3,4,5,6,7,8,9},
-        vec!{2,3,4,5,6,7,8,9,10}}
-    ;
-    let b = board::Board{grid: grid, calculations: 0};
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{6,6,6,7,7,7,8,8,8}, 
+        vec!{6,6,6,7,7,7,8,8,8}, 
+        vec!{6,6,6,7,7,7,8,8,8}
+    };
+    let b = board::Board{grid: grid, calculations: 0, size: 9};
 
-    assert_eq!(b.get_column(8), vec!{9,10});
-    assert_eq!(b.get_column(0), vec!{1,2});
-    assert_eq!(b.get_column(5), vec!{6,7});
+    assert_eq!(b.get_column(8), vec!{2,2,2,5,5,5,8,8,8});
+    assert_eq!(b.get_column(0), vec!{0,0,0,3,3,3,6,6,6});
+    assert_eq!(b.get_column(5), vec!{1,1,1,4,4,4,7,7,7});
 }
 
 #[test]
 #[should_panic]
 fn get_column_invalid_test(){
     let grid: Vec<Vec<u8>> = vec!{vec!{1,2,3,4,5,6,7,8,9}, vec!{2,3,4,5,6,7,8,9,10}};
-    let b = board::Board{grid: grid, calculations: 0};
+    let b = board::Board{grid: grid, calculations: 0, size: 0};
 
-    b.get_column(10);
+    b.get_column(100);
 }
 
 #[test]
 fn get_row_valid_test(){
-    let grid: Vec<Vec<u8>> = vec!{vec!{1,2,3,4,5,6,7,8,9}, vec!{2,3,4,5,6,7,8,9,10}};
-    let b = board::Board{grid: grid, calculations: 0};
-    let grid: Vec<Vec<u8>> = vec!{vec!{1,2,3,4,5,6,7,8,9}, vec!{2,3,4,5,6,7,8,9,10}};
+    let grid: Vec<Vec<u8>> = vec!{
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{6,6,6,7,7,7,8,8,8}, 
+        vec!{6,6,6,7,7,7,8,8,8}, 
+        vec!{6,6,6,7,7,7,8,8,8}
+    };
+    let b = board::Board{grid: grid, calculations: 0, size: 9};
+    let grid: Vec<Vec<u8>> = vec!{
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{6,6,6,7,7,7,8,8,8}, 
+        vec!{6,6,6,7,7,7,8,8,8}, 
+        vec!{6,6,6,7,7,7,8,8,8}
+    };
     assert_eq!{b.get_row(0), grid[0]};
     assert_eq!(b.get_row(1), grid[1]);
 }
@@ -67,10 +94,20 @@ fn get_row_valid_test(){
 #[test]
 #[should_panic]
 fn get_row_invalid_test(){
-    let grid: Vec<Vec<u8>> = vec!{vec!{1,2,3,4,5,6,7,8,9}, vec!{2,3,4,5,6,7,8,9,10}};
-    let b = board::Board{grid: grid, calculations: 0};
+    let grid: Vec<Vec<u8>> = vec!{
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{6,6,6,7,7,7,8,8,8}, 
+        vec!{6,6,6,7,7,7,8,8,8}, 
+        vec!{6,6,6,7,7,7,8,8,8}
+    };
+    let b = board::Board{grid: grid, calculations: 0, size: 9};
 
-    b.get_row(3);
+    b.get_row(9);
 }
 
 #[test]
@@ -86,7 +123,7 @@ fn get_square_valid_test(){
         vec!{6,6,6,7,7,7,8,8,8}, 
         vec!{6,6,6,7,7,7,8,8,8}
     };
-    let b = board::Board{grid: grid, calculations: 0};
+    let b = board::Board{grid: grid, calculations: 0, size: 9};
 
     assert_eq!(b.get_square(0), vec!{0,0,0,0,0,0,0,0,0});
     assert_eq!(b.get_square(8), vec!{8,8,8,8,8,8,8,8,8});
@@ -108,18 +145,18 @@ fn get_square_invalid_test(){
         vec!{6,6,6,7,7,7,8,8,8}, 
         vec!{6,6,6,7,7,7,8,8,8}
     };
-    let b = board::Board{grid: grid, calculations: 0};
+    let b = board::Board{grid: grid, calculations: 0, size: 9};
 
     assert_eq!(b.get_square(9), vec!{0,0,0,0,0,0,0,0,0});
 }
 
 #[test]
-fn check_duplicate_test(){
+fn check_duplicate_valid_test(){
     let grid: Vec<Vec<u8>> = vec!{
         vec!{0,0},
         vec!{0,0}
     };
-    let b = board::Board{grid: grid, calculations: 0};
+    let b = board::Board{grid: grid, calculations: 0, size: 2};
 
     assert_eq!(b.check_duplicate(), true);
 
@@ -129,7 +166,41 @@ fn check_duplicate_test(){
         vec!{2,1,4,3},
         vec!{4,3,2,1}
     };
-    let b = board::Board{grid: grid, calculations: 0};
+    let b = board::Board{grid: grid, calculations: 0, size: 4};
 
     assert_eq!(b.check_duplicate(), false);
+}
+
+#[test]
+fn valid_valid_test(){
+    let grid: Vec<Vec<u8>> = vec!{
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{0,0,0,1,1,1,2,2,2}, 
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{3,3,3,4,4,4,5,5,5},
+        vec!{6,6,6,7,7,7,8,8,8}, 
+        vec!{6,6,6,7,7,7,8,8,8}, 
+        vec!{6,6,6,7,7,7,8,8,8}
+    };
+    let b = board::Board{grid: grid, calculations: 0, size: 9};
+
+    assert_eq!(b.valid(true), true);
+    assert_eq!(b.valid(false), false);
+}
+
+#[test]
+fn possible_valid_test(){
+    let grid: Vec<Vec<u8>> = vec!{
+        vec!{1,2,3,4},
+        vec!{3,0,1,2},
+        vec!{4,0,2,0},
+        vec!{0,0,0,0}
+    };
+    let b = board::new(4);
+    assert_eq!(b.possible(5), vec!{1,2,3,4});
+    let b = board::Board{grid: grid, calculations: 0, size: 4};
+    assert_eq!(b.possible(5), vec!{4});
+    assert_eq!(b.possible(9), vec!{1, 3});
 }
