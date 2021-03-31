@@ -157,6 +157,63 @@ impl Board{
         p
     }
 
+    pub fn solve(&mut self) -> bool{
+        let mut start_index: u16 = 0;
+        {
+            let mut count: u16 = 0;
+            for i in self.grid.iter(){
+                if start_index != 0{
+                    for j in i{
+                        if start_index != 0 {
+                            if j != &0{
+                                start_index = count;
+                            }
+                            else {
+                                count += 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        self.solve_index(start_index)
+    }
+
+    fn solve_index(&mut self, index: u16) -> bool{
+        if index >= (self.size*self.size) as u16 {
+            return self.valid(false) && !self.check_duplicate();
+        }
+        let row: usize = index as usize / self.size;
+        let column: usize = index as usize % self.size;
+        let index_next = index + 1;
+
+        let mut return_value: bool = false;
+        if self.grid[row][column] != 0 {
+            return_value = self.solve_index(index_next);
+        }
+        else {
+            let possible = self.possible(index as u8);
+            if possible == vec!{}{
+                return false;
+            }
+            for p in possible{
+                if return_value{
+                    break;
+                }
+                    self.grid[row][column] = p;
+                    self.calculations += 1;
+                    return_value = self.solve_index(index_next);
+            }
+            if !return_value {
+                self.grid[row][column] = 0;
+                return false;
+            }
+        }
+
+        return_value
+    }
+    
 }
 
 impl Display for Board{

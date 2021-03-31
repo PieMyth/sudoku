@@ -196,11 +196,51 @@ fn possible_valid_test(){
         vec!{1,2,3,4},
         vec!{3,0,1,2},
         vec!{4,0,2,0},
-        vec!{0,0,0,0}
+        vec!{0,2,0,0}
     };
     let b = board::new(4);
     assert_eq!(b.possible(5), vec!{1,2,3,4});
     let b = board::Board{grid: grid, calculations: 0, size: 4};
     assert_eq!(b.possible(5), vec!{4});
     assert_eq!(b.possible(9), vec!{1, 3});
+    assert_eq!(b.possible(12), vec!{});
+}
+
+#[test]
+fn solve_valid_test_4x4(){
+    let grid: Vec<Vec<u8>> = vec!{
+        vec!{1,2,3,4},
+        vec!{3,0,1,2},
+        vec!{4,0,2,0},
+        vec!{0,0,0,0}
+    };
+    let mut b = board::Board{grid: grid, calculations: 0, size: 4};
+    assert_eq!(true, b.solve());
+    assert_eq!(true, b.solve());
+}
+
+#[test]
+fn solve_valid_test_9x9(){
+    let grid: Vec<Vec<u8>> = vec!{
+        vec!{0,0,2,4,0,0,0,9,0},
+        vec!{3,0,0,6,9,0,0,0,4},
+        vec!{0,0,0,0,0,0,0,5,0},
+        vec!{0,0,0,0,0,0,5,7,3},
+        vec!{0,0,0,9,0,2,0,0,0},
+        vec!{4,1,8,0,0,0,0,0,0},
+        vec!{0,3,0,0,0,0,0,0,0},
+        vec!{2,0,0,0,8,1,0,0,6},
+        vec!{0,7,0,0,0,9,8,0,0}
+    };
+    let mut b = board::Board{grid: grid, calculations: 0, size: 9};
+    println!("{:?}", b.solve());
+    b = board::new(9);
+    println!("{:?}", b.solve());
+}
+
+#[test]
+fn solve_valid_test_big(){
+    let mut b = board::new(25);
+    b.solve();
+    println!("{}", b);
 }
