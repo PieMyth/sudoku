@@ -240,7 +240,7 @@ fn solve_valid_test_9x9(){
 
 #[test]
 fn solve_valid_test_big(){
-    let mut b = board::new(25);
+    let mut b = board::new(16);
     b.solve();
     println!("{}", b);
 }
