@@ -36,11 +36,6 @@ impl Board{
     pub fn get_row(&self, row_number: u8) -> Vec<u8> {
         let row_number: usize = row_number.into();
         assert!(self.size>row_number);
-        // let mut row: Vec<u8> = Vec::new();
-        // for i in 0..self.grid[row_number].len(){
-        //     row.push(self.grid[row_number][i]);
-        // }
-        // row
         self.grid[row_number].clone()
     }
 
